@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 1,
+  "id": "hybridious",
+  "version": "${version}",
+  "name": "hybridious",
+  "description": "Created because AndrewH200 pulled out a glass bottle during a pillow fight...",
+  "authors": [
+    "hybridious"
+  ],
+  "contact": {
+    "repo": "https://github.com/Hybridious/hybridious_mod"
+  },
+  "icon": "assets/template/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "meteor": [
+      "dev.hybridious.Hybridious"
+    ]
+  },
+  "mixins": [
+    "hybridious.mixins.json"
+  ],
+  "custom": {
+    "meteor-client:color": "225,25,25"
+  },
+  "depends": {
+    "java": ">=21",
+    "minecraft": ["${mc_version}"],
+    "meteor-client": "*"
+  }
+}
