@@ -71,5 +71,3 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 Check the [Releases](../../releases) page for detailed changelog information and download links.
 ---
-
-*Made with ❤️ for the Minecraft community*
