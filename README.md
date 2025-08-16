@@ -2,7 +2,7 @@
 
 > *Created because AndrewH200 pulled out a glass bottle during a pillow fight...*
 
-A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utilities for survival and exploration.
+A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utilities for stuff.
 
 ## 📋 Requirements
 
