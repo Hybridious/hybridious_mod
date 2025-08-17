@@ -71,3 +71,7 @@ This project is licensed under the GNU Affero General Public License v3.0 (AGPL-
 
 Check the [Releases](../../releases) page for detailed changelog information and download links.
 ---
+## 🔍 Related Projects
+
+**Third-Party Alternatives:**
+- [AutoMoss for RusherHack](https://github.com/master7720/AutoMoss) - A third-party AutoMoss implementation for RusherHack based on this project's code (not affiliated with this project)
