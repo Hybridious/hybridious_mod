@@ -13,7 +13,7 @@ A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utili
 ## 🚀 Features
 
 ### 🌱 AutoMoss
-Automatically uses bonemeal on moss blocks and optionally azalea bushes for efficient farming and terrain modification.
+Automatically uses bonemeal on moss blocks and optionally azalea bushes for efficient terrain modification.
 
 ### 💣 B36 (Peacemaker)
 Air bombing system using flint and TNT - perfect for making an impression on the locals.
