@@ -19,6 +19,7 @@ public class Hybridious extends MeteorAddon {
         Modules.get().add(new B36());
         Modules.get().add(new SethBoat());
         Modules.get().add(new MinecartDetector());
+        Modules.get().add(new LawnMower());
     }
 
     @Override
