@@ -32,115 +32,115 @@ public class MinecartDetector extends Module {
 
     // General Settings
     private final Setting<Boolean> highlightIncorrectDirection = sgGeneral.add(new BoolSetting.Builder()
-        .name("highlight-incorrect-direction")
-        .description("Highlights hopper minecarts that are not facing south.")
-        .defaultValue(true)
-        .build()
+            .name("highlight-incorrect-direction")
+            .description("Highlights hopper minecarts that are not facing south.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Boolean> detectEntityStacking = sgGeneral.add(new BoolSetting.Builder()
-        .name("detect-entity-stacking")
-        .description("Alerts when chest minecarts are entity stacked.")
-        .defaultValue(true)
-        .build()
+            .name("detect-entity-stacking")
+            .description("Alerts when chest minecarts are entity stacked.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Boolean> excludeWaterMinecarts = sgGeneral.add(new BoolSetting.Builder()
-        .name("exclude-water-minecarts")
-        .description("Excludes minecarts that have water nearby from highlighting.")
-        .defaultValue(true)
-        .build()
+            .name("exclude-water-minecarts")
+            .description("Excludes minecarts that have water nearby from highlighting.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Boolean> playSoundAlert = sgGeneral.add(new BoolSetting.Builder()
-        .name("play-sound-alert")
-        .description("Plays a sound when stacked minecarts are detected.")
-        .defaultValue(true)
-        .build()
+            .name("play-sound-alert")
+            .description("Plays a sound when stacked minecarts are detected.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Double> checkRadius = sgGeneral.add(new DoubleSetting.Builder()
-        .name("check-radius")
-        .description("The radius to check for entity stacking.")
-        .defaultValue(0.5)
-        .min(0.1)
-        .sliderRange(0.1, 2)
-        .build()
+            .name("check-radius")
+            .description("The radius to check for entity stacking.")
+            .defaultValue(0.5)
+            .min(0.1)
+            .sliderRange(0.1, 2)
+            .build()
     );
 
     private final Setting<Integer> alertCooldown = sgGeneral.add(new IntSetting.Builder()
-        .name("alert-cooldown")
-        .description("Cooldown in ticks between alerts for the same stacked entities.")
-        .defaultValue(100)
-        .min(1)
-        .sliderRange(1, 200)
-        .build()
+            .name("alert-cooldown")
+            .description("Cooldown in ticks between alerts for the same stacked entities.")
+            .defaultValue(100)
+            .min(1)
+            .sliderRange(1, 200)
+            .build()
     );
 
     private final Setting<Integer> checkFrequency = sgGeneral.add(new IntSetting.Builder()
-        .name("check-frequency")
-        .description("How often to check for minecarts (in ticks). Higher values = less lag.")
-        .defaultValue(20)
-        .min(5)
-        .sliderRange(5, 100)
-        .build()
+            .name("check-frequency")
+            .description("How often to check for minecarts (in ticks). Higher values = less lag.")
+            .defaultValue(20)
+            .min(5)
+            .sliderRange(5, 100)
+            .build()
     );
 
     private final Setting<Double> detectionRange = sgGeneral.add(new DoubleSetting.Builder()
-        .name("detection-range")
-        .description("The maximum distance from the player to detect minecarts.")
-        .defaultValue(128.0)
-        .min(16.0)
-        .sliderRange(16.0, 256.0)
-        .build()
+            .name("detection-range")
+            .description("The maximum distance from the player to detect minecarts.")
+            .defaultValue(128.0)
+            .min(16.0)
+            .sliderRange(16.0, 256.0)
+            .build()
     );
 
     private final Setting<Boolean> streamingMode = sgGeneral.add(new BoolSetting.Builder()
-        .name("streaming-mode")
-        .description("Hides coordinates in chat messages but still logs them to file.")
-        .defaultValue(false)
-        .build()
+            .name("streaming-mode")
+            .description("Hides coordinates in chat messages but still logs them to file.")
+            .defaultValue(false)
+            .build()
     );
 
     // Logging Settings
     private final Setting<Boolean> logToFile = sgLogging.add(new BoolSetting.Builder()
-        .name("log-to-file")
-        .description("Logs detected minecarts to file.")
-        .defaultValue(true)
-        .build()
+            .name("log-to-file")
+            .description("Logs detected minecarts to file.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Boolean> logStackedMinecarts = sgLogging.add(new BoolSetting.Builder()
-        .name("log-stacked-minecarts")
-        .description("Logs stacked minecarts to STACKED_MINECARTS.txt")
-        .defaultValue(true)
-        .visible(() -> logToFile.get())
-        .build()
+            .name("log-stacked-minecarts")
+            .description("Logs stacked minecarts to STACKED_MINECARTS.txt")
+            .defaultValue(true)
+            .visible(() -> logToFile.get())
+            .build()
     );
 
     private final Setting<Boolean> logWrongDirectionMinecarts = sgLogging.add(new BoolSetting.Builder()
-        .name("log-wrong-direction-minecarts")
-        .description("Logs minecarts facing the wrong direction to WRONG_DIRECTION_MINECARTS.txt")
-        .defaultValue(true)
-        .visible(() -> logToFile.get())
-        .build()
+            .name("log-wrong-direction-minecarts")
+            .description("Logs minecarts facing the wrong direction to WRONG_DIRECTION_MINECARTS.txt")
+            .defaultValue(true)
+            .visible(() -> logToFile.get())
+            .build()
     );
 
     private final Setting<Boolean> notifyWrongDirection = sgLogging.add(new BoolSetting.Builder()
-        .name("notify-wrong-direction")
-        .description("Sends a chat message when a minecart facing the wrong direction is found.")
-        .defaultValue(true)
-        .build()
+            .name("notify-wrong-direction")
+            .description("Sends a chat message when a minecart facing the wrong direction is found.")
+            .defaultValue(true)
+            .build()
     );
 
     private final Setting<Integer> wrongDirectionCooldown = sgLogging.add(new IntSetting.Builder()
-        .name("wrong-direction-cooldown")
-        .description("Cooldown in ticks between alerts for wrong direction minecarts.")
-        .defaultValue(100)
-        .min(1)
-        .sliderRange(1, 200)
-        .visible(() -> notifyWrongDirection.get())
-        .build()
+            .name("wrong-direction-cooldown")
+            .description("Cooldown in ticks between alerts for wrong direction minecarts.")
+            .defaultValue(100)
+            .min(1)
+            .sliderRange(1, 200)
+            .visible(() -> notifyWrongDirection.get())
+            .build()
     );
 
     // Render Settings
@@ -152,43 +152,43 @@ public class MinecartDetector extends Module {
     }
 
     private final Setting<RenderMode> renderMode = sgRender.add(new EnumSetting.Builder<RenderMode>()
-        .name("render-mode")
-        .description("How incorrectly oriented minecarts are rendered.")
-        .defaultValue(RenderMode.Line)
-        .build()
+            .name("render-mode")
+            .description("How incorrectly oriented minecarts are rendered.")
+            .defaultValue(RenderMode.Box)
+            .build()
     );
 
     private final Setting<ShapeMode> shapeMode = sgRender.add(new EnumSetting.Builder<ShapeMode>()
-        .name("shape-mode")
-        .description("How the shapes are rendered.")
-        .defaultValue(ShapeMode.Both)
-        .visible(() -> renderMode.get() == RenderMode.Box)
-        .build()
+            .name("shape-mode")
+            .description("How the shapes are rendered.")
+            .defaultValue(ShapeMode.Both)
+            .visible(() -> renderMode.get() == RenderMode.Box)
+            .build()
     );
 
     private final Setting<Double> tracerThickness = sgRender.add(new DoubleSetting.Builder()
-        .name("tracer-thickness")
-        .description("The thickness of tracer lines.")
-        .defaultValue(1.5)
-        .min(0.1)
-        .max(5.0)
-        .sliderRange(0.1, 5.0)
-        .visible(() -> renderMode.get() == RenderMode.Tracer || renderMode.get() == RenderMode.Line)
-        .build()
+            .name("tracer-thickness")
+            .description("The thickness of tracer lines.")
+            .defaultValue(1.5)
+            .min(0.1)
+            .max(5.0)
+            .sliderRange(0.1, 5.0)
+            .visible(() -> renderMode.get() == RenderMode.Tracer || renderMode.get() == RenderMode.Line)
+            .build()
     );
 
     private final Setting<SettingColor> incorrectDirectionColor = sgRender.add(new ColorSetting.Builder()
-        .name("incorrect-direction-color")
-        .description("The color of hopper minecarts facing the incorrect direction.")
-        .defaultValue(new SettingColor(255, 0, 0, 75))
-        .build()
+            .name("incorrect-direction-color")
+            .description("The color of hopper minecarts facing the incorrect direction.")
+            .defaultValue(new SettingColor(255, 0, 0, 75))
+            .build()
     );
 
     private final Setting<SettingColor> stackedEntityColor = sgRender.add(new ColorSetting.Builder()
-        .name("stacked-entity-color")
-        .description("The color of stacked chest minecarts.")
-        .defaultValue(new SettingColor(255, 255, 0, 75))
-        .build()
+            .name("stacked-entity-color")
+            .description("The color of stacked chest minecarts.")
+            .defaultValue(new SettingColor(255, 255, 0, 75))
+            .build()
     );
 
     // Tracking variables - using more efficient data structures and caching
@@ -244,28 +244,31 @@ public class MinecartDetector extends Module {
 
     private void initializeLogFiles() {
         try {
+            // Create hybridious_mod directory in the meteor-client folder
+            File hybridModDir = meteordevelopment.meteorclient.MeteorClient.FOLDER.toPath().resolve("hybridious_mod").toFile();
+
+            // Create the directory if it doesn't exist
+            if (!hybridModDir.exists()) {
+                hybridModDir.mkdirs();
+            }
+
             if (logStackedMinecarts.get()) {
-                stackedMinecartLogFile = new File(mc.runDirectory, "STACKED_MINECARTS.txt");
-                initializeLogFile(stackedMinecartLogFile, "Stacked Minecarts Log");
+                stackedMinecartLogFile = new File(hybridModDir, "STACKED_MINECARTS.txt");
+                // Only create file if it doesn't exist, don't write anything yet
+                if (!stackedMinecartLogFile.exists()) {
+                    stackedMinecartLogFile.createNewFile();
+                }
             }
 
             if (logWrongDirectionMinecarts.get()) {
-                wrongDirectionLogFile = new File(mc.runDirectory, "WRONG_DIRECTION_MINECARTS.txt");
-                initializeLogFile(wrongDirectionLogFile, "Wrong Direction Minecarts Log");
+                wrongDirectionLogFile = new File(hybridModDir, "WRONG_DIRECTION_MINECARTS.txt");
+                // Only create file if it doesn't exist, don't write anything yet
+                if (!wrongDirectionLogFile.exists()) {
+                    wrongDirectionLogFile.createNewFile();
+                }
             }
         } catch (IOException e) {
             error("Failed to initialize log files: " + e.getMessage());
-        }
-    }
-
-    private void initializeLogFile(File file, String title) throws IOException {
-        if (!file.exists()) {
-            file.createNewFile();
-            writeToLogFile(file, title + " - Created on " + getCurrentTimeStamp() + "\n", false);
-            writeToLogFile(file, "-------------------------------------------------\n", true);
-        } else {
-            // Add separator when starting new session
-            writeToLogFile(file, "\n----- New session: " + getCurrentTimeStamp() + " -----\n", true);
         }
     }
 
@@ -321,8 +324,8 @@ public class MinecartDetector extends Module {
         // Clean up old wrong direction locations that we didn't see this time
         if (!currentWrongDirectionLocations.isEmpty() && logWrongDirectionMinecarts.get()) {
             knownWrongDirectionLocations.entrySet().removeIf(entry ->
-                !currentWrongDirectionLocations.contains(entry.getKey()) &&
-                    System.currentTimeMillis() - entry.getValue() > 300000); // 5 minutes
+                    !currentWrongDirectionLocations.contains(entry.getKey()) &&
+                            System.currentTimeMillis() - entry.getValue() > 300000); // 5 minutes
         }
 
         // Second pass - check for entity stacking (much more efficient now)
@@ -345,9 +348,9 @@ public class MinecartDetector extends Module {
         if (logWrongDirectionMinecarts.get() || notifyWrongDirection.get()) {
             Vec3d pos = entity.getPos();
             String locationKey = String.format("%d,%d,%d",
-                (int)Math.round(pos.x),
-                (int)Math.round(pos.y),
-                (int)Math.round(pos.z));
+                    (int)Math.round(pos.x),
+                    (int)Math.round(pos.y),
+                    (int)Math.round(pos.z));
 
             // Add to current session locations
             currentWrongDirectionLocations.add(locationKey);
@@ -377,9 +380,9 @@ public class MinecartDetector extends Module {
             if (shouldNotify) {
                 // Log the new wrong direction minecart
                 String logMessage = String.format(
-                    "[%s] Wrong direction hopper minecart at X: %.2f, Y: %.2f, Z: %.2f, Yaw: %.1f in %s",
-                    getCurrentTimeStamp(), pos.x, pos.y, pos.z, entity.getYaw(),
-                    mc.world.getRegistryKey().getValue().toString()
+                        "[%s] Wrong direction hopper minecart at X: %.2f, Y: %.2f, Z: %.2f, Yaw: %.1f in %s",
+                        getCurrentTimeStamp(), pos.x, pos.y, pos.z, entity.getYaw(),
+                        mc.world.getRegistryKey().getValue().toString()
                 );
 
                 // Send client-side notification
@@ -389,7 +392,7 @@ public class MinecartDetector extends Module {
                         chatMessage = "[MinecartDetector] Detected hopper minecart facing wrong direction [COORDINATES HIDDEN]";
                     } else {
                         chatMessage = String.format("[MinecartDetector] Detected hopper minecart facing wrong direction at X: %.1f, Y: %.1f, Z: %.1f, Yaw: %.1f",
-                            pos.x, pos.y, pos.z, entity.getYaw());
+                                pos.x, pos.y, pos.z, entity.getYaw());
                     }
 
                     ChatUtils.info(chatMessage);
@@ -430,9 +433,9 @@ public class MinecartDetector extends Module {
                     // Get position as string for location tracking - rounded to block position
                     Vec3d pos = minecart1.getPos();
                     String locationKey = String.format("%d,%d,%d",
-                        (int)Math.round(pos.x),
-                        (int)Math.round(pos.y),
-                        (int)Math.round(pos.z));
+                            (int)Math.round(pos.x),
+                            (int)Math.round(pos.y),
+                            (int)Math.round(pos.z));
 
                     // Add to current session locations
                     currentSessionLocations.add(locationKey);
@@ -441,9 +444,9 @@ public class MinecartDetector extends Module {
                     if (!knownStackedLocations.containsKey(locationKey)) {
                         // Log the new stacked minecarts
                         String logMessage = String.format(
-                            "[%s] Stacked chest minecarts at X: %.2f, Y: %.2f, Z: %.2f in %s",
-                            getCurrentTimeStamp(), pos.x, pos.y, pos.z,
-                            mc.world.getRegistryKey().getValue().toString()
+                                "[%s] Stacked chest minecarts at X: %.2f, Y: %.2f, Z: %.2f in %s",
+                                getCurrentTimeStamp(), pos.x, pos.y, pos.z,
+                                mc.world.getRegistryKey().getValue().toString()
                         );
 
                         // Send client-side notification
@@ -452,7 +455,7 @@ public class MinecartDetector extends Module {
                             chatMessage = "[MinecartDetector] Detected stacked chest minecarts [COORDINATES HIDDEN]";
                         } else {
                             chatMessage = String.format("[MinecartDetector] Detected stacked chest minecarts at X: %.1f, Y: %.1f, Z: %.1f",
-                                pos.x, pos.y, pos.z);
+                                    pos.x, pos.y, pos.z);
                         }
 
                         ChatUtils.info(chatMessage);
@@ -478,8 +481,8 @@ public class MinecartDetector extends Module {
         // This allows re-alerting if stacked minecarts reappear later
         if (!currentSessionLocations.isEmpty()) {
             knownStackedLocations.entrySet().removeIf(entry ->
-                !currentSessionLocations.contains(entry.getKey()) &&
-                    System.currentTimeMillis() - entry.getValue() > 300000); // 5 minutes
+                    !currentSessionLocations.contains(entry.getKey()) &&
+                            System.currentTimeMillis() - entry.getValue() > 300000); // 5 minutes
         }
     }
 
@@ -513,12 +516,11 @@ public class MinecartDetector extends Module {
         RenderMode mode = renderMode.get();
 
         if (mode == RenderMode.Line) {
-            // Simple vertical line with thickness
+            // Simple vertical line
             event.renderer.line(
-                x, y, z,
-                x, y + 0.5, z,
-                color,
-                color
+                    x, y, z,
+                    x, y + 0.5, z,
+                    color
             );
         }
         else if (mode == RenderMode.Box) {
@@ -536,33 +538,32 @@ public class MinecartDetector extends Module {
 
             // Using the correct method signature with two colors and the required integer parameter
             event.renderer.box(
-                minX, minY, minZ,
-                maxX, maxY, maxZ,
-                color,             // Fill color
-                color,             // Outline color
-                shapeMode.get(),
-                0                  // Default value for the face mask/render option
+                    minX, minY, minZ,
+                    maxX, maxY, maxZ,
+                    color,             // Fill color
+                    color,             // Outline color
+                    shapeMode.get(),
+                    0                  // Default value for the face mask/render option
             );
         }
         else if (mode == RenderMode.Tracer) {
-            // Tracer from player to entity with thickness
+            // Tracer from player to entity center
             if (mc.player != null) {
                 Vec3d eyes = mc.player.getEyePos();
+                // Draw line from player eyes to minecart center (y + 0.35 for center height)
                 event.renderer.line(
-                    eyes.x, eyes.y, eyes.z,
-                    x, y + 0.5, z,
-                    color,
-                    color
+                        eyes.x, eyes.y, eyes.z,
+                        x, y + 0.35, z,
+                        color
                 );
             }
         }
         else {
-            // Text or fallback - just use line with thickness
+            // Text or fallback - just use line
             event.renderer.line(
-                x, y, z,
-                x, y + 0.5, z,
-                color,
-                color
+                    x, y, z,
+                    x, y + 0.5, z,
+                    color
             );
         }
     }
@@ -579,7 +580,7 @@ public class MinecartDetector extends Module {
 
         // Check if yaw is close to SOUTH (180 degrees)
         boolean isCorrect = Math.abs(yaw - CORRECT_YAW) <= YAW_TOLERANCE ||
-            Math.abs(yaw - CORRECT_YAW - 360) <= YAW_TOLERANCE;
+                Math.abs(yaw - CORRECT_YAW - 360) <= YAW_TOLERANCE;
 
         // Cache the result
         orientationCache.put(entityId, isCorrect);
@@ -595,13 +596,13 @@ public class MinecartDetector extends Module {
 
         // Check only essential positions for water
         BlockPos[] positions = {
-            entityPos,                  // Current position
-            entityPos.down(),           // Below
-            entityPos.up(),             // Above
-            entityPos.north(),          // Cardinal directions
-            entityPos.south(),
-            entityPos.east(),
-            entityPos.west()
+                entityPos,                  // Current position
+                entityPos.down(),           // Below
+                entityPos.up(),             // Above
+                entityPos.north(),          // Cardinal directions
+                entityPos.south(),
+                entityPos.east(),
+                entityPos.west()
         };
 
         boolean hasWater = false;
@@ -612,7 +613,7 @@ public class MinecartDetector extends Module {
 
             // Check if block state contains water
             if (mc.world.getBlockState(pos).getFluidState().isStill() ||
-                !mc.world.getBlockState(pos).getFluidState().isEmpty()) {
+                    !mc.world.getBlockState(pos).getFluidState().isEmpty()) {
                 hasWater = true;
                 break;
             }
@@ -672,19 +673,7 @@ public class MinecartDetector extends Module {
 
     @EventHandler
     private void onGameLeft(GameLeftEvent event) {
-        // Log session end if logging is enabled
-        if (logToFile.get()) {
-            // End stacked minecarts log session
-            if (logStackedMinecarts.get() && stackedMinecartLogFile != null && stackedMinecartLogFile.exists()) {
-                writeToLogFile(stackedMinecartLogFile, "----- Session ended: " + getCurrentTimeStamp() + " -----\n\n", true);
-            }
-
-            // End wrong direction minecarts log session
-            if (logWrongDirectionMinecarts.get() && wrongDirectionLogFile != null && wrongDirectionLogFile.exists()) {
-                writeToLogFile(wrongDirectionLogFile, "----- Session ended: " + getCurrentTimeStamp() + " -----\n\n", true);
-            }
-        }
-
+        // Just clear caches, no session end logging
         clearAllCaches();
         tickCounter = 0;
     }
