@@ -9,7 +9,7 @@ public class AutoGF extends Module {
     private static final String HARDCODED_MESSAGE = ">PLEASE be my gf I'm literally begging you. I'll do ANYTHING. Please please please just give me ONE chance. I'm on my knees rn. PLEASE";;
 
     public AutoGF() {
-        super(Hybridious.CATEGORY, "auto-gf", "A scientifically proven method of getting a gf.");
+        super(Hybridious.CATEGORY, "auto-gf", "A scientifically proven method.");
     }
 
     @Override
