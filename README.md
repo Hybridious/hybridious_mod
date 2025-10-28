@@ -29,6 +29,10 @@ Detects and logs chested minecarts with direction and stacking analysis.
 ### 🌿 LawnMower
 Automatically mows lawns by breaking grass and other vegetation blocks, keeping your surroundings clean and tidy.
 
+###🏴 Banner Finder
+Detects and highlights banners in the world with visual tracers and audio alerts.
+- Blacklist: use `.bbl add` to add banners to blacklist and `.bbl remove` to remove the banner your holding. 
+
 ### 🔊 SoundOnSneak
 Plays custom audio files when you sneak or on a random timer interval. Perfect for adding personality to your gameplay!
 - **Sneak Trigger:** Play sounds when pressing the sneak key (can be toggled on/off)
