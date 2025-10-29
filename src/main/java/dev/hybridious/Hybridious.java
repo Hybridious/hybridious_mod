@@ -5,6 +5,7 @@ import dev.hybridious.modules.*;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
 import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Modules;
+import meteordevelopment.meteorclient.commands.Commands;
 import org.slf4j.Logger;
 
 public class Hybridious extends MeteorAddon {
@@ -23,13 +24,14 @@ public class Hybridious extends MeteorAddon {
         Modules.get().add(new BannerFinder());
         Modules.get().add(new LawnMower());
         Modules.get().add(new SoundOnSneak());
+        
+        // Commands
+        Commands.add(new BannerBlacklist());
     }
 
     @Override
     public void onRegisterCategories() {
-
         Modules.registerCategory(CATEGORY);
-//        Modules.registerCategory(PVP);
     }
 
     @Override
