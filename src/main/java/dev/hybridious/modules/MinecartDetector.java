@@ -1,5 +1,4 @@
 package dev.hybridious.modules;
-
 import dev.hybridious.Hybridious;
 import net.minecraft.util.math.BlockPos;
 import meteordevelopment.meteorclient.events.game.GameLeftEvent;
@@ -942,13 +941,25 @@ public class MinecartDetector extends Module {
         }
 
         BlockPos[] positions = {
+                // Center and vertical
                 entityPos,
                 entityPos.down(),
                 entityPos.up(),
+                // Cardinal directions
                 entityPos.north(),
                 entityPos.south(),
                 entityPos.east(),
-                entityPos.west()
+                entityPos.west(),
+                // Diagonal corners (horizontal)
+                entityPos.north().east(),
+                entityPos.north().west(),
+                entityPos.south().east(),
+                entityPos.south().west(),
+                // Diagonal corners (one block down)
+                entityPos.down().north().east(),
+                entityPos.down().north().west(),
+                entityPos.down().south().east(),
+                entityPos.down().south().west()
         };
 
         boolean hasWater = false;
