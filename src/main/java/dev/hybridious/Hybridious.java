@@ -2,6 +2,7 @@ package dev.hybridious;
 
 import com.mojang.logging.LogUtils;
 import dev.hybridious.modules.*;
+import dev.hybridious.commands.*;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
 import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Modules;
