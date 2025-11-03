@@ -22,7 +22,7 @@ AI-powered NSFW map detection and filtering system with intelligent caching.
 - **Singleplayer & Multiplayer:** Works in all game modes
 - **Item Frame Support:** Filters maps in item frames, not just held maps
 
-**Setup:**
+**Setup:** **Currently unreleased use cache files instead.**
 1. Run the NSFW detection API server (see API documentation)
 2. Configure API URL in module settings (default: `http://127.0.0.1:5000`)
 3. Enable the module - maps are blocked until validated as safe
