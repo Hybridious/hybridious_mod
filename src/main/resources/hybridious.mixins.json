@@ -3,6 +3,10 @@
   "package": "dev.hybridious.mixin",
   "compatibilityLevel": "JAVA_21",
   "client": [
+    "MapRendererMixin",
+    "MapTextureMixin",
+    "HeldItemRendererMixin",
+    "ItemFrameMapFilterMixin"
   ],
   "injectors": {
     "defaultRequire": 1
