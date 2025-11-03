@@ -13,6 +13,8 @@ A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utili
 ### 🗺️ MapFilter
 AI-powered NSFW map detection and filtering system with intelligent caching.
 
+**STREAMERS: ExtraToolTips still works on the maps, best to have that turned off for maps.**
+
 **Features:**
 - **Batch Processing:** Validates up to 100 maps per request for efficiency
 - **Hash-Based Cache:** Instant recognition of previously validated maps (stored persistently)
