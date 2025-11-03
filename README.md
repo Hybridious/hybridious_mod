@@ -60,7 +60,7 @@ Advanced entity riding system with automatic rotation locking, designed for effi
 
 ### 🚂 Minecart Detector
 Detects and logs chested minecarts with direction and stacking analysis.
-- Logs info to files located in "%APPDATA%\.minecraft\meteor-client\hybridious_mod" in the folders "STACKED_MINECARTS.txt" and "WRONG_DIRECTION_MINECARTS.txt"
+- Logs info to files located in "%APPDATA%\.minecraft\meteor-client\hybridious_mod" in the file called "MinecartDetector.log".
 
 ### 🌿 LawnMower
 Automatically mows lawns by breaking grass and other vegetation blocks, keeping your surroundings clean and tidy.
