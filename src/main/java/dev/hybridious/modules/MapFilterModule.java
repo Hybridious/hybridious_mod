@@ -5,10 +5,7 @@ import meteordevelopment.meteorclient.systems.modules.Module;
 import net.minecraft.client.MinecraftClient;
 import net.minecraft.item.map.MapState;
 import net.minecraft.component.type.MapIdComponent;
-
-import dev.hybridious.utils.MapValidator;
-import dev.hybridious.utils.BatchMapValidator;
-import dev.hybridious.utils.MapHashCache;
+import dev.hybridious.utils.*;
 
 import java.util.*;
 import java.util.concurrent.*;
@@ -147,10 +144,8 @@ public class MapFilterModule extends Module {
         // Try to get map state
         MapState state = getMapState(mapId);
         if (state == null) {
-            // Can't get map state - allow rendering temporarily
-            if (logResults.get()) {
-                System.out.println("[MapFilter] Map " + mapId + " state not available yet");
-            }
+            // Can't get map state - allow temporarily and retry next frame
+            // This prevents blocking all maps on startup
             return true;
         }
 
@@ -175,18 +170,28 @@ public class MapFilterModule extends Module {
                         return isSafe;
                     }
                 }
+            } else {
+                // We have hash but no cache result - check again
+                Boolean isSafe = hashCache.isSafe(hash);
+                if (isSafe != null) {
+                    validationCache.put(mapId, isSafe);
+                    return isSafe;
+                }
             }
         }
 
-        // Not in cache - queue for validation
+        // Not in cache - queue for validation and allow temporarily
+        // Block only AFTER first validation attempt
         if (pendingValidations.add(mapId)) {
             batchQueue.offer(mapId);
             if (logResults.get()) {
                 System.out.println("[MapFilter] Map " + mapId + " queued for validation");
             }
+            return true; // Allow on first encounter
         }
 
-        return false; // Block until validated
+        // Already queued - block while waiting
+        return false;
     }
 
     /**
@@ -194,24 +199,25 @@ public class MapFilterModule extends Module {
      */
     private MapState getMapState(int mapId) {
         MinecraftClient client = MinecraftClient.getInstance();
+        MapIdComponent mapIdComponent = new MapIdComponent(mapId);
 
-        // Try client world first (works for multiplayer and sometimes singleplayer)
-        if (client.world != null) {
-            MapState state = client.world.getMapState(new MapIdComponent(mapId));
+        // Try integrated server first (singleplayer)
+        if (client.getServer() != null) {
+            MapState state = client.getServer().getOverworld().getMapState(mapIdComponent);
             if (state != null) {
                 if (logResults.get()) {
-                    System.out.println("[MapFilter] Got MapState for " + mapId + " from client.world");
+                    System.out.println("[MapFilter] Got MapState for " + mapId + " from integrated server");
                 }
                 return state;
             }
         }
 
-        // Try integrated server (singleplayer)
-        if (client.getServer() != null && client.getServer().getOverworld() != null) {
-            MapState state = client.getServer().getOverworld().getMapState(new MapIdComponent(mapId));
+        // Fall back to client world (multiplayer)
+        if (client.world != null) {
+            MapState state = client.world.getMapState(mapIdComponent);
             if (state != null) {
                 if (logResults.get()) {
-                    System.out.println("[MapFilter] Got MapState for " + mapId + " from integrated server");
+                    System.out.println("[MapFilter] Got MapState for " + mapId + " from client.world");
                 }
                 return state;
             }
