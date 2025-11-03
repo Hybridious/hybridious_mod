@@ -10,6 +10,41 @@ A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utili
 
 ## 🚀 Features
 
+### 🗺️ MapFilter
+AI-powered NSFW map detection and filtering system with intelligent caching.
+**Doesnt work in singleplayer, might fix that!**
+
+**Features:**
+- **Batch Processing:** Validates up to 100 maps per request for efficiency
+- **Hash-Based Cache:** Instant recognition of previously validated maps (stored persistently)
+- **Separate Lists:** Maintains separate whitelist (SFW) and blacklist (NSFW) files
+- **Manual Override:** Whitelist/blacklist maps in-hand to fix false positives
+- **Singleplayer & Multiplayer:** Works in all game modes
+- **Item Frame Support:** Filters maps in item frames, not just held maps
+
+**Setup:**
+1. Run the NSFW detection API server (see API documentation)
+2. Configure API URL in module settings (default: `http://127.0.0.1:5000`)
+3. Enable the module - maps are blocked until validated as safe
+
+**Cache Files:** Located in `%APPDATA%\.minecraft\meteor-client\hybridious_mod\`
+- `sfw_maps.json` - Whitelisted maps
+- `nsfw_maps.json` - Blacklisted maps
+
+**Commands:**
+- `.mapfilter stats` - View cache statistics (total/safe/blocked)
+- `.mapfilter clear` - Clear all cached maps
+- `.mapfilter whitelist` - Mark held map as safe (removes from blacklist)
+- `.mapfilter blacklist` - Mark held map as NSFW (removes from whitelist)
+
+**Settings:**
+- `api-url` - API endpoint URL
+- `threshold` - NSFW confidence threshold (0.0-1.0)
+- `batch-size` - Maps per batch request (1-100, default: 20)
+- `batch-delay-ms` - Accumulation delay before processing (100-2000ms)
+- `use-hash-cache` - Enable persistent hash-based caching
+- `log-results` - Log validation results to console
+
 ### 🌱 AutoMoss
 Automatically uses bonemeal on moss blocks and optionally azalea bushes for efficient terrain modification.
 
