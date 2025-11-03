@@ -11,7 +11,7 @@ A feature-rich MeteorClient addon for Minecraft 1.21.4 that adds essential utili
 ## 🚀 Features
 
 ### 🗺️ MapFilter
-AI-powered NSFW map detection and filtering system with intelligent caching.
+AI-powered* NSFW map detection and filtering system with intelligent caching.
 
 **Compatibility:** MapFilter does NOT work with ExtraToolTips enabled - disable ExtraToolTips for complete map filtering.
 **Singleplayer Safety:** Always backup your singleplayer world before using MapFilter.
