@@ -89,6 +89,28 @@ Plays custom audio files when you sneak or on a random timer interval. Perfect f
    - Set "sound-file" to specify a particular file to play
 5. Adjust volume, timer intervals, and other settings to your preference
 
+### 📊 DropTest
+Tracks entity drops over time with statistics, drop rates, and automatic shulker/dub calculations for farm testing.
+
+**Features:**
+- Multi-item tracking with configurable targets
+- Drop rates per second/minute/hour
+- Auto-calculates time to fill shulkers and dubs
+- Handles server item merging for accurate counts
+- Adjustable scan interval for performance
+
+**Output:**
+- Logs saved to `%APPDATA%\.minecraft\meteor-client\hybridious_mod\DropTest.txt`
+- Includes timestamps, rates, shulker calculations, and distribution analysis
+
+**Settings:**
+- **target-items** - Items to track (list)
+- **test-duration-minutes** - Test length (1-120 min)
+- **track-all-items** - Track everything vs specific items
+- **item-stack-size** - Set to 1/16/64 for shulker math
+- **scan-interval** - Performance tuning (1-20 ticks)
+- **clear-logs** - Checkbox to clear previous logs
+
 ## 📦 Installation
 1. Download and install [Fabric Loader](https://fabricmc.net/use/)
 2. Install [MeteorClient](https://meteorclient.com/) for Minecraft 1.21.4
