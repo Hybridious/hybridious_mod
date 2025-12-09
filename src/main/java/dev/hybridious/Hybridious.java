@@ -26,7 +26,8 @@ public class Hybridious extends MeteorAddon {
         Modules.get().add(new SoundOnSneak());
         Modules.get().add(new MapFilterModule());
         Modules.get().add(new DropTest());
-        Modules.get().add(new TabGuiScale());       
+        Modules.get().add(new TabGuiScale()); 
+        Modules.get().add(new RocketSpeed()); 
         // Commands
         Commands.add(new MapFilterCommand());
         Commands.add(new BannerBlacklist());
