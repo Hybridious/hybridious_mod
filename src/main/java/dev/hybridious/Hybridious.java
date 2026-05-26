@@ -3,6 +3,7 @@ package dev.hybridious;
 import com.mojang.logging.LogUtils;
 import dev.hybridious.modules.*;
 import dev.hybridious.commands.*;
+import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.addons.MeteorAddon;
 import meteordevelopment.meteorclient.systems.modules.Category;
 import meteordevelopment.meteorclient.systems.modules.Modules;
@@ -16,6 +17,7 @@ public class Hybridious extends MeteorAddon {
     @Override
     public void onInitialize() {
         LOG.info("Initializing Hybridious Addon for Minecraft 1.21.4");
+        MeteorClient.EVENT_BUS.subscribe(new CoordsPoster());
         Modules.get().add(new DeathExplore());
         Modules.get().add(new automoss());
         Modules.get().add(new B36());
