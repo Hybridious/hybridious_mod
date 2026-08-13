@@ -442,25 +442,7 @@ public class DropTest extends Module {
             BufferedWriter writer = null;
             try {
                 // Get AppData directory
-                String appData = System.getenv("APPDATA");
-                if (appData == null) {
-                    // Fallback for non-Windows systems
-                    String userHome = System.getProperty("user.home");
-                    String os = System.getProperty("os.name").toLowerCase();
-                    if (os.contains("mac")) {
-                        appData = userHome + "/Library/Application Support";
-                    } else if (os.contains("linux")) {
-                        appData = userHome + "/.local/share";
-                    } else {
-                        appData = userHome;
-                    }
-                }
-
-                // Create base directory
-                File baseDir = new File(appData, ".minecraft" + File.separator + "meteor-client" + File.separator + "hybridious_mod");
-                if (!baseDir.exists()) {
-                    baseDir.mkdirs();
-                }
+                File baseDir = getBaseDir();
 
                 // Single file: DropTest.txt
                 File resultsFile = new File(baseDir, "DropTest.txt");
