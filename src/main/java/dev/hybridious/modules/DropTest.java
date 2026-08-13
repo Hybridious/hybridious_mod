@@ -1,6 +1,7 @@
 package dev.hybridious.modules;
 
 import dev.hybridious.Hybridious;
+import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.settings.*;
 import meteordevelopment.meteorclient.systems.modules.Module;
@@ -102,7 +103,19 @@ public class DropTest extends Module {
     public DropTest() {
         super(Hybridious.CATEGORY, "drop-test", "Tracks entity drops over time and outputs statistics to files");
     }
-
+    
+    private File getBaseDir() {
+        File baseDir = MeteorClient.FOLDER.toPath()
+                .resolve("hybridious_mod")
+                .toFile();
+    
+        if (!baseDir.exists()) {
+            baseDir.mkdirs();
+        }
+    
+        return baseDir;
+    }
+    
     @Override
     public void onActivate() {
         startTest();
@@ -377,25 +390,7 @@ public class DropTest extends Module {
         new Thread(() -> {
             try {
                 // Get AppData directory
-                String appData = System.getenv("APPDATA");
-                if (appData == null) {
-                    // Fallback for non-Windows systems
-                    String userHome = System.getProperty("user.home");
-                    String os = System.getProperty("os.name").toLowerCase();
-                    if (os.contains("mac")) {
-                        appData = userHome + "/Library/Application Support";
-                    } else if (os.contains("linux")) {
-                        appData = userHome + "/.local/share";
-                    } else {
-                        appData = userHome;
-                    }
-                }
-
-                // Create base directory
-                File baseDir = new File(appData, ".minecraft" + File.separator + "meteor-client" + File.separator + "hybridious_mod");
-                if (!baseDir.exists()) {
-                    baseDir.mkdirs();
-                }
+                File baseDir = getBaseDir();
 
                 // Delete the old log file
                 File resultsFile = new File(baseDir, "DropTest.txt");
@@ -447,25 +442,7 @@ public class DropTest extends Module {
             BufferedWriter writer = null;
             try {
                 // Get AppData directory
-                String appData = System.getenv("APPDATA");
-                if (appData == null) {
-                    // Fallback for non-Windows systems
-                    String userHome = System.getProperty("user.home");
-                    String os = System.getProperty("os.name").toLowerCase();
-                    if (os.contains("mac")) {
-                        appData = userHome + "/Library/Application Support";
-                    } else if (os.contains("linux")) {
-                        appData = userHome + "/.local/share";
-                    } else {
-                        appData = userHome;
-                    }
-                }
-
-                // Create base directory
-                File baseDir = new File(appData, ".minecraft" + File.separator + "meteor-client" + File.separator + "hybridious_mod");
-                if (!baseDir.exists()) {
-                    baseDir.mkdirs();
-                }
+                File baseDir = getBaseDir();
 
                 // Single file: DropTest.txt
                 File resultsFile = new File(baseDir, "DropTest.txt");

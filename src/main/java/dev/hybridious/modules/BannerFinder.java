@@ -1,6 +1,7 @@
 package dev.hybridious.modules;
 
 import dev.hybridious.Hybridious;
+import meteordevelopment.meteorclient.MeteorClient;
 import meteordevelopment.meteorclient.events.render.Render3DEvent;
 import meteordevelopment.meteorclient.events.world.TickEvent;
 import meteordevelopment.meteorclient.renderer.ShapeMode;
@@ -28,7 +29,7 @@ import java.nio.file.Paths;
 import java.util.*;
 
 public class BannerFinder extends Module {
-    private static final Path BLACKLIST_DIR = Paths.get(System.getenv("APPDATA"), ".minecraft", "meteor-client", "hybridious_mod");
+    private static final Path BLACKLIST_DIR = MeteorClient.FOLDER.toPath().resolve("hybridious_mod");
     private static final Path BLACKLIST_FILE = BLACKLIST_DIR.resolve("banner_blacklist.json");
     private static final Gson GSON = new GsonBuilder().setPrettyPrinting().create();
     private static final Set<String> blacklistedPatterns = new HashSet<>();
